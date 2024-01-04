@@ -14,7 +14,7 @@ column-gap: 15px;
 
 }
 .profile__avatar{
- border-radius: 50%;
+  border-radius: 50%;
   width: 120px;
   height: 120px;
   margin-top: 36px;
@@ -25,12 +25,20 @@ column-gap: 15px;
   width: 100%;
   font-size: 42px;
   font-weight: 500;
-  line-height: 48px;
+  line-height: 3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
 }
 .profile__subtitle{
+width: 415px;
 font-family: Inter;
 font-size: 18px;
 font-weight: 400;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
 
 
 }
