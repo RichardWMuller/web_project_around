@@ -41,75 +41,7 @@
           </div>
         </section>
         <section class="elements">
-          <ul class="elements__list">
-            <li class="elements__list-img">
-              <img
-                src="./images/albufeira-portugal-praia-arrifes.jpg"
-                alt="foto praia dos arrifes"
-                class="elements__item"
-              />
-              <div class="elements__description">
-                <p class="elements__title">Albufeira</p>
-                <button class="button elements__btn-hrt"></button>
-              </div>
-            </li>
-            <li class="elements__list-img">
-              <img
-                src="./images/praia_do_camilo.jpg"
-                alt="foto da praia do camilo"
-                class="elements__item"
-              />
-              <div class="elements__description">
-                <p class="elements__title">Albufeira</p>
-                <button class="button elements__btn-hrt"></button>
-              </div>
-            </li>
-            <li class="elements__list-img">
-              <img
-                src="./images/praia_dona_ana.jpg"
-                alt="foto da praia da dona ana"
-                class="elements__item"
-              />
-              <div class="elements__description">
-                <p class="elements__title">Lagos</p>
-                <button class="button elements__btn-hrt"></button>
-              </div>
-            </li>
-            <li class="elements__list-img">
-              <img
-                src="./images/praia-da-marinha-algarve.png"
-                alt="foto da praia da marinha"
-                class="elements__item"
-              />
-              <div class="elements__description">
-                <p class="elements__title">Carvoeiro</p>
-                <button class="button elements__btn-hrt"></button>
-              </div>
-            </li>
-            <li class="elements__list-img">
-              <img
-                src="./images/acessopraiadafalesia.jpg"
-                alt="foto da praia da falesia"
-                class="elements__item"
-              />
-              <div class="elements__description">
-                <p class="elements__title">Albufeira</p>
-                <button class="button elements__btn-hrt"></button>
-              </div>
-            </li>
-
-            <li class="elements__list-img">
-              <img
-                src="./images/View-over-Praia-da-Oura.jpg"
-                alt="foto da  praia da oura"
-                class="elements__item"
-              />
-              <div class="elements__description">
-                <p class="elements__title">Albufeira</p>
-                <button class="button elements__btn-hrt"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="elements__list"></ul>
         </section>
       </main>
       <footer class="footer container">
@@ -134,6 +66,67 @@
         </form>
       </div>
     </div>
+
+    <div class="popup popup__img">
+      <div class="popup__img-container">
+        <button type="button" class="popup__close-btn">
+          <img
+            class="popup__img-close-btn-icon"
+            src="./images/close_icon.svg"
+            alt="botão de fechar janela"
+          />
+        </button>
+        <img
+              class="popup__img-modal"
+              src="./images/albufeira-portugal-praia-arrifes.jpg"
+              alt=""
+            />
+            <p class="popup__img-footer">Popup Image Footer</p>
+      </div>
+    </div>
+
+      <div class="popup2">
+        <form class="popup2__form">
+          <button type="button" class="popup2__close-btn">
+            <img
+              class="popup2__close-btn-icon"
+              src="./images/close_icon.svg"
+              alt="botão de fechar janela"
+            />
+          </button>
+          <h2 class="popup2__title">Novo local</h2>
+          <div class="popup2__input-container">
+            <input
+              id="title"
+              class="popup2__input-box popup2__input-box-title"
+              type="text"
+              name="title"
+              placeholder="Título"
+            />
+            <input
+              id="link"
+              class="popup2__input-box popup2__input-box-link"
+              type="text"
+              name="link"
+              placeholder="Link da imagem"
+            />
+          </div>
+          <button type="submit" class="popup2__save-btn">Criar</button>
+        </form>
+      </div>
+    </div>
+    <template id="elements__list">
+      <li class="elements__list-img">
+        <div class="elements__list-img-wrapper">
+          <img src="" alt="" class="elements__item" />
+        </div>
+        <button class="button elements__btn-trh"></button>
+        <div class="elements__description">
+          <p class="elements__title"></p>
+          <button class="button elements__btn-hrt"></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/scripts.js"></script>
   </body>
 </html>

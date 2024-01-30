@@ -22,12 +22,44 @@
 }
 
 .elements__item{
- height: 282px;
- max-height: 100%;
- object-fit: cover;
+  height: 282px;
+  max-height: 100%;
+  overflow: hidden;
+  width: 100%;
+  object-fit: cover;
+ cursor: pointer;
+ transition: all 0.2s ease-in-out;
+}
+.elements__list-img-wrapper{
+  height: 282px;
+  max-height: 100%;
+  overflow: hidden;
+  width: 100%;
+  object-fit: cover;
+  transition: all 0.2s ease-in-out;
+}
+.elements__item:hover{
+  transform: scale(1.2);
  
 }
+.elements__btn-trh{
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 18px;
+  height: 20px;
+  flex-shrink: 0;
+  background-image: url(../images/Trash.svg);
+  color: #fff;
+  border: none;
+}
+
+.elements__btn-trh:hover{
+  opacity: 0.6;
+}
+
 .elements__list-img{
+  position: relative;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
@@ -56,6 +88,9 @@
 }
 .elements__btn-hrt:hover{
   opacity: 0.6;
+}
+.elements__btn-hrt_actived{
+  background-image: url(../images/heart-activated.svg);
 }
 
 @media screen and (max-width: 640px) {
