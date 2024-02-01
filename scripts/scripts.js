@@ -155,22 +155,22 @@ function handleOpenImageModal(imageSrc, imageTitle) {
 
   popupImgElement.classList.add("popup__img-opened");
 }
-document.addEventListener("DOMContentLoaded", function () {
-  let itemListArray = document.getElementsByTagName("li");
-  Array.from(itemListArray).forEach((item) => {
-    const imgElContainer = item.querySelector(".elements__list-img-wrapper");
 
-    imgElContainer.addEventListener("click", () => {
-      const clickedElementImg = imgElContainer.getElementsByTagName("img");
+elementsList.addEventListener("click", function (event) {
+  const target = event.target;
+  console.log("teste", target);
 
-      const clickedImageTitle =
-        item.querySelector(".elements__title").textContent;
+  if (target.classList.contains("elements__item")) {
+    const clickedCard = target.closest(".elements__list-img");
 
-      const imageSrc = clickedElementImg[0].attributes.alt.value;
-      console.log("teste", imageSrc);
-      handleOpenImageModal(imageSrc, clickedImageTitle);
-    });
-  });
+    const clickedImageTitle =
+      clickedCard.querySelector(".elements__title").textContent;
+    const clickedElementImg = target;
+
+    const imageSrc = clickedElementImg.getAttribute("alt");
+
+    handleOpenImageModal(imageSrc, clickedImageTitle);
+  }
 });
 
 function handleCloseImageModal() {

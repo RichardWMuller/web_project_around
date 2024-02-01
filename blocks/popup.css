@@ -10,13 +10,14 @@
   opacity: 0;
   justify-content: center;
   padding-top: 195px;
- 
+  transition: all 0.3s linear;
+
 }
 .popup__img{
   
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s, opacity 0.3s linear;
+  transition: all 0.3s linear;
   
 }
 .popup__img-container{
@@ -46,16 +47,7 @@
   
 }
 
-.popup.popup__opened {
-  transition: visibility 0s, opacity 0.3s linear;
-  visibility: visible;
-  opacity: 1;
-}
-.popup.popup__close-btn-icon {
-  transition: visibility 0s 0.3s, opacity 0.3s linear;
-  opacity: 0;
-  visibility: hidden;
-}
+
 .popup__img-footer{
   margin-top: 10px;
   font-size: 12px;
@@ -156,7 +148,7 @@ box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
   opacity: 0;
   justify-content: center;
   padding-top: 195px;
-
+  transition: all 0.3s linear;
 }
 .popupAdd__opened {
   display: flex;
@@ -164,16 +156,6 @@ box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
   
   visibility: visible;
   opacity: 1;
-}
-.popupAdd.popupAdd__opened {
-  transition: visibility 0s, opacity 0.3s linear;
-  visibility: visible;
-  opacity: 1;
-}
-.popupAdd.popupAdd__close-btn-icon {
-  transition: visibility 0s 0.3s, opacity 0.3s linear;
-  opacity: 0;
-  visibility: hidden;
 }
 
 .popupAdd__form {
