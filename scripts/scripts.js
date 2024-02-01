@@ -141,19 +141,19 @@ function setInitialCards() {
 setInitialCards();
 
 function handleOpenImageModal(imageSrc, imageTitle) {
-  let popupImgElement = document.querySelector(".popup__img");
-  let popupImgContainer = document.querySelector(".popup__img-container");
+  let popupImgElement = document.querySelector(".popupImg");
+  let popupImgContainer = document.querySelector(".popupImg-container");
 
-  let imgEl = document.querySelector(".popup__img-modal");
+  let imgEl = document.querySelector(".popupImg-modal");
   imgEl.setAttribute("src", imageSrc);
 
-  let footerEl = document.querySelector(".popup__img-footer");
+  let footerEl = document.querySelector(".popupImg-footer");
   footerEl.textContent = imageTitle;
 
   popupImgContainer.appendChild(imgEl);
   popupImgContainer.appendChild(footerEl);
 
-  popupImgElement.classList.add("popup__img-opened");
+  popupImgElement.classList.add("popupImg-opened");
 }
 
 elementsList.addEventListener("click", function (event) {
@@ -174,15 +174,13 @@ elementsList.addEventListener("click", function (event) {
 });
 
 function handleCloseImageModal() {
-  let imgOpened = document.querySelector(".popup__img-opened");
-  let popupImgElement = document.querySelector(".popup__img");
+  let imgOpened = document.querySelector(".popupImg-opened");
+  let popupImgElement = document.querySelector(".popupImg");
 
-  popupImgElement.classList.remove("popup__img-opened");
+  popupImgElement.classList.remove("popupImg-opened");
 
-  imgOpened = imgOpened.classList.remove("popup__img-opened");
+  imgOpened = imgOpened.classList.remove("popupImg-opened");
 }
 
-let popupImageCloseButton = document.querySelector(
-  ".popup__img-close-btn-icon"
-);
+let popupImageCloseButton = document.querySelector(".popupImg-close-btn-icon");
 popupImageCloseButton.addEventListener("click", handleCloseImageModal);
