@@ -59,8 +59,24 @@
           </button>
           <h2 class="popup__title">Editar Perfil</h2>
           <div class="popup__input-container">
-            <input id="name" class="popup__input-box" type="text" name="name" />
-            <input id="job" class="popup__input-box" type="text" name="job" />
+            <input
+              id="name"
+              class="popup__input-box"
+              type="text"
+              name="name"
+              minlength="3"
+              maxlength="20"
+              required
+            />
+            <input
+              id="job"
+              class="popup__input-box"
+              type="text"
+              name="job"
+              minlength="3"
+              maxlength="20"
+              required
+            />
           </div>
           <button type="submit" class="popup__save-btn">Salvar</button>
         </form>
@@ -97,6 +113,9 @@
               type="text"
               name="title"
               placeholder="Título"
+              minlength="3"
+              maxlength="24"
+              required
             />
             <input
               id="link"
@@ -104,6 +123,8 @@
               type="text"
               name="link"
               placeholder="Link da imagem"
+              minlength="15"
+              required
             />
           </div>
           <button type="submit" class="popupAdd__save-btn">Criar</button>

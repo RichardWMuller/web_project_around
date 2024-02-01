@@ -1,12 +1,12 @@
 /*POP UPS */
 
-let profileButton = document.querySelector(".profile__btn-title");
+const profileButton = document.querySelector(".profile__btn-title");
 
 profileButton.addEventListener("click", () => {
-  let popupElement = document.querySelector(".popup");
+  const popupElement = document.querySelector(".popup");
 
-  let profileTitle = document.querySelector(".profile__title");
-  let profileSubtitle = document.querySelector(".profile__subtitle");
+  const profileTitle = document.querySelector(".profile__title");
+  const profileSubtitle = document.querySelector(".profile__subtitle");
 
   document.querySelector("#name").value = profileTitle.textContent;
   document.querySelector("#job").value = profileSubtitle.textContent;
@@ -15,20 +15,20 @@ profileButton.addEventListener("click", () => {
 });
 
 function handleModalClose() {
-  let closePopup = document.querySelector(".popup__opened");
+  const closePopup = document.querySelector(".popup__opened");
   closePopup = closePopup.classList.remove("popup__opened");
 }
 
-let modalCloseButton = document.querySelector(".popup__close-btn-icon");
+const modalCloseButton = document.querySelector(".popup__close-btn-icon");
 modalCloseButton.addEventListener("click", handleModalClose);
 
-let formElement = document.querySelector(".popup__form");
+const editProfileFormElement = document.querySelector(".popup__form");
 
 function handleProfileFormSubmit(event) {
   event.preventDefault();
 
-  let nameInput = document.querySelector("#name");
-  let jobInput = document.querySelector("#job");
+  const nameInput = document.querySelector("#name");
+  const jobInput = document.querySelector("#job");
 
   document.querySelector(".profile__title").textContent = nameInput.value;
   document.querySelector(".profile__subtitle").textContent = jobInput.value;
@@ -36,26 +36,26 @@ function handleProfileFormSubmit(event) {
   handleModalClose();
 }
 
-formElement.addEventListener("submit", handleProfileFormSubmit);
+editProfileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 /* IMAGE ADD BUTTON */
 
-let imageButtonAdd = document.querySelector(".profile__btn-add");
+const imageButtonAdd = document.querySelector(".profile__btn-add");
 
 imageButtonAdd.addEventListener("click", () => {
-  let popupElement = document.querySelector(".popupAdd");
+  const popupElement = document.querySelector(".popupAdd");
 
   popupElement.classList.add("popupAdd__opened");
 });
 
 function handleModalCloseAdd() {
-  let closePopupAdd = document.querySelector(".popupAdd__opened");
+  const closePopupAdd = document.querySelector(".popupAdd__opened");
   closePopupAdd = closePopupAdd.classList.remove("popupAdd__opened");
 }
-let modalCloseButtonAdd = document.querySelector(".popupAdd__close-btn-icon");
+const modalCloseButtonAdd = document.querySelector(".popupAdd__close-btn-icon");
 modalCloseButtonAdd.addEventListener("click", handleModalCloseAdd);
 
-let formElementAdd = document.querySelector(".popupAdd__form");
+const addCardFormElement = document.querySelector(".popupAdd__form");
 
 function handleProfileFormSubmitAdd(event) {
   event.preventDefault();
@@ -94,15 +94,15 @@ const initialCards = [
 ];
 
 function addCard(card) {
-  let cardTemplate = document
+  const cardTemplate = document
     .querySelector("#elements__list")
     .content.querySelector(".elements__list-img");
-  let cardElement = cardTemplate.cloneNode(true);
+  const cardElement = cardTemplate.cloneNode(true);
   cardElement.querySelector(".elements__title").textContent = card.name;
   cardElement.querySelector(".elements__item").setAttribute("src", card.link);
-  cardElement.querySelector(".elements__item").setAttribute("alt", card.link);
-  let elementHrtBtn = cardElement.querySelector(".elements__btn-hrt");
-  let elementTrsBtn = cardElement.querySelector(".elements__btn-trh");
+  cardElement.querySelector(".elements__item").setAttribute("alt", card.name);
+  const elementHrtBtn = cardElement.querySelector(".elements__btn-hrt");
+  const elementTrsBtn = cardElement.querySelector(".elements__btn-trh");
 
   elementHrtBtn.addEventListener("click", (evt) => {
     evt.target.classList.toggle("elements__btn-hrt_actived");
@@ -141,13 +141,13 @@ function setInitialCards() {
 setInitialCards();
 
 function handleOpenImageModal(imageSrc, imageTitle) {
-  let popupImgElement = document.querySelector(".popupImg");
-  let popupImgContainer = document.querySelector(".popupImg-container");
+  const popupImgElement = document.querySelector(".popupImg");
+  const popupImgContainer = document.querySelector(".popupImg-container");
 
-  let imgEl = document.querySelector(".popupImg-modal");
+  const imgEl = document.querySelector(".popupImg-modal");
   imgEl.setAttribute("src", imageSrc);
 
-  let footerEl = document.querySelector(".popupImg-footer");
+  const footerEl = document.querySelector(".popupImg-footer");
   footerEl.textContent = imageTitle;
 
   popupImgContainer.appendChild(imgEl);
@@ -167,20 +167,22 @@ elementsList.addEventListener("click", function (event) {
       clickedCard.querySelector(".elements__title").textContent;
     const clickedElementImg = target;
 
-    const imageSrc = clickedElementImg.getAttribute("alt");
+    const imageSrc = clickedElementImg.getAttribute("src");
 
     handleOpenImageModal(imageSrc, clickedImageTitle);
   }
 });
 
 function handleCloseImageModal() {
-  let imgOpened = document.querySelector(".popupImg-opened");
-  let popupImgElement = document.querySelector(".popupImg");
+  const imgOpened = document.querySelector(".popupImg-opened");
+  const popupImgElement = document.querySelector(".popupImg");
 
   popupImgElement.classList.remove("popupImg-opened");
 
   imgOpened = imgOpened.classList.remove("popupImg-opened");
 }
 
-let popupImageCloseButton = document.querySelector(".popupImg-close-btn-icon");
+const popupImageCloseButton = document.querySelector(
+  ".popupImg-close-btn-icon"
+);
 popupImageCloseButton.addEventListener("click", handleCloseImageModal);
