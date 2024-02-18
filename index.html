@@ -49,7 +49,7 @@
       </footer>
 
       <div class="popup">
-        <form class="popup__form">
+        <form class="popup__form" name="editProfile">
           <button type="button" class="popup__close-btn">
             <img
               class="popup__close-btn-icon"
@@ -59,26 +59,34 @@
           </button>
           <h2 class="popup__title">Editar Perfil</h2>
           <div class="popup__input-container">
-            <input
-              id="name"
-              class="popup__input-box"
-              type="text"
-              name="name"
-              minlength="3"
-              maxlength="20"
-              required
-            />
-            <input
-              id="job"
-              class="popup__input-box"
-              type="text"
-              name="job"
-              minlength="3"
-              maxlength="20"
-              required
-            />
+            <div class="popup__control popup__size">
+              <input
+                id="name"
+                class="popup__input-box popup__input-box-name"
+                type="text"
+                name="name"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span class="popup__error"></span>
+            </div>
+            <div class="popup__control">
+              <input
+                id="job"
+                class="popup__input-box popup__input-box-job"
+                type="text"
+                name="job"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span class="popup__error"></span>
+            </div>
           </div>
-          <button type="submit" class="popup__save-btn">Salvar</button>
+          <button type="submit" class="popup__save-btn popup__button-disabled">
+            Salvar
+          </button>
         </form>
       </div>
 
@@ -97,7 +105,7 @@
       </div>
 
       <div class="popupAdd">
-        <form class="popupAdd__form">
+        <form class="popupAdd__form" name="addPlace">
           <button type="button" class="popupAdd__close-btn">
             <img
               class="popupAdd__close-btn-icon"
@@ -107,25 +115,31 @@
           </button>
           <h2 class="popupAdd__title">Novo local</h2>
           <div class="popupAdd__input-container">
-            <input
-              id="title"
-              class="popupAdd__input-box popupAdd__input-box-title"
-              type="text"
-              name="title"
-              placeholder="Título"
-              minlength="3"
-              maxlength="24"
-              required
-            />
-            <input
-              id="link"
-              class="popupAdd__input-box popupAdd__input-box-link"
-              type="text"
-              name="link"
-              placeholder="Link da imagem"
-              minlength="15"
-              required
-            />
+            <div class="popupAdd__control popupAdd__size">
+              <input
+                id="title"
+                class="popupAdd__input-box popupAdd__input-box-title"
+                type="text"
+                name="title"
+                placeholder="Título"
+                minlength="2"
+                maxlength="30"
+                required
+              />
+              <span class="popupAdd__error"></span>
+            </div>
+            <div class="popupAdd__control">
+              <input
+                id="link"
+                class="popupAdd__input-box popupAdd__input-box-link"
+                type="url"
+                name="link"
+                placeholder="Link da imagem"
+                minlength="15"
+                required
+              />
+              <span class="popupAdd__error"></span>
+            </div>
           </div>
           <button type="submit" class="popupAdd__save-btn">Criar</button>
         </form>
@@ -145,5 +159,6 @@
       </li>
     </template>
     <script src="./scripts/scripts.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
