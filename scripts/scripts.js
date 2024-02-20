@@ -1,5 +1,4 @@
 /*POP UPS */
-// import enableValidation from "./validation.js";
 
 const profileButton = document.querySelector(".profile__btn-title");
 
@@ -18,8 +17,22 @@ profileButton.addEventListener("click", () => {
   saveButton.setAttribute("disabled", true);
 });
 
+function cleanValidations(inputSelector) {
+  const popupInputs = document.querySelectorAll(inputSelector);
+
+  const inputs = Array.from(popupInputs);
+
+  inputs.forEach((input) => {
+    const spanError = input.parentElement.querySelector(".popup__error");
+    spanError.textContent = "";
+
+    input.classList.remove("popup__input_type_error");
+  });
+}
+
 function handleModalClose() {
   const closePopup = document.querySelector(".popup__opened");
+  cleanValidations(".popup__input-box");
   closePopup.classList.remove("popup__opened");
 }
 
@@ -30,14 +43,14 @@ function closePopupWithKey(evt) {
   const closePopup = document.querySelector(".popup__opened");
   const hasPopup = !!closePopup;
   if (hasPopup && evt.key === "Escape") {
-    closePopup.classList.remove("popup__opened");
+    handleModalClose();
   }
 }
 
 function closePopupClickOut(evt) {
   const closePopup = document.querySelector(".popup");
   if (evt.target == closePopup) {
-    closePopup.classList.remove("popup__opened");
+    handleModalClose();
   }
 }
 
@@ -72,8 +85,18 @@ imageButtonAdd.addEventListener("click", () => {
   saveButton.setAttribute("disabled", true);
 });
 
+function resetNewLocalForm() {
+  const titleInput = document.querySelector(".popupAdd__input-box-title");
+  const linkInput = document.querySelector(".popupAdd__input-box-link");
+
+  titleInput.value = "";
+  linkInput.value = "";
+}
+
 function handleModalCloseAdd() {
   const closePopupAdd = document.querySelector(".popupAdd__opened");
+  cleanValidations(".popupAdd__input-box");
+  resetNewLocalForm();
   closePopupAdd.classList.remove("popupAdd__opened");
 }
 
@@ -84,7 +107,7 @@ function closePopupAddWithKey(evt) {
   const closePopupAdd = document.querySelector(".popupAdd__opened");
   const hasPopupAdd = !!closePopupAdd;
   if (hasPopupAdd && evt.key == "Escape") {
-    closePopupAdd.classList.remove("popupAdd__opened");
+    handleModalCloseAdd();
   }
 }
 
@@ -93,7 +116,7 @@ document.addEventListener("keydown", closePopupAddWithKey);
 function closePopupAddClickOut(evt) {
   const closePopupAdd = document.querySelector(".popupAdd");
   if (evt.target == closePopupAdd) {
-    closePopupAdd.classList.remove("popupAdd__opened");
+    handleModalCloseAdd();
   }
 }
 
