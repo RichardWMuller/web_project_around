@@ -2,16 +2,14 @@ const profileInputField = document.querySelector(".popup__input-box-name");
 
 profileInputField.addEventListener("change", enableValidation);
 
-function addErrorMessage(element, spanElement) {
-  const spanMessage = document.querySelector(
-    spanElement.replace("element", element.name)
-  );
-  spanMessage.textContent = element.validationMessage;
+function addErrorMessage(element, errorClass) {
+  const spanError = element.parentElement.querySelector(errorClass);
+  spanError.textContent = element.validationMessage;
 }
 
-function removeErrorMessage(spanElement) {
-  const spanMessage = document.querySelector(spanElement);
-  spanMessage.textContent = " ";
+function removeErrorMessage(element, errorClass) {
+  const spanError = element.parentElement.querySelector(errorClass);
+  spanError.textContent = "";
 }
 
 function addErrorClass(element, errorClass) {
@@ -22,25 +20,37 @@ function removeErrorClass(element, errorClass) {
   element.classList.remove(errorClass);
 }
 
+function toggleAccessSubmitButton(inputs, saveButton) {
+  const shouldDisable = inputs.some((input) => input.validity.valid === false);
+
+  if (shouldDisable) {
+    saveButton.setAttribute("disabled", true);
+    return;
+  }
+
+  saveButton.removeAttribute("disabled");
+}
+
 function enableValidation(elements) {
   const formElements = document.querySelector(elements.formSelector);
   const inputElements = formElements.querySelectorAll(elements.inputSelector);
+  const saveButton = formElements.querySelector(elements.submitButtonSelector);
   const inputs = Array.from(inputElements);
 
-  console.log("inputs", inputs);
-  const { spanSelector, errorClass } = elements;
+  const { inputErrorClass, errorClass } = elements;
 
   inputs.forEach((input) => {
-    input.addEventListener("onkeydown", (event) => {
+    input.addEventListener("input", (event) => {
       const element = event.target;
-      console.log("element", element.value);
+
       if (!element.validity.valid || element.value == "") {
-        addErrorClass(element, errorClass);
-        addErrorMessage(element, spanSelector);
+        addErrorClass(element, inputErrorClass);
+        addErrorMessage(element, errorClass);
       } else {
-        removeErrorClass(element, errorClass);
-        removeErrorMessage(spanSelector);
+        removeErrorClass(element, inputErrorClass);
+        removeErrorMessage(element, errorClass);
       }
+      toggleAccessSubmitButton(inputs, saveButton);
     });
   });
 }
@@ -49,39 +59,14 @@ enableValidation({
   formSelector: ".popup__form",
   inputSelector: ".popup__input-box",
   submitButtonSelector: ".popup__save-btn",
-  inactiveButtonClass: "popup__button-disabled",
   inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error",
+  errorClass: ".popup__error",
 });
-// const forminput = document.querySelector(".popup__form");
-// const formInput = formElement.querySelector(".popup__input-box-name");
-// const formError = formElement.querySelector(".popup__error");
 
-// console.log("teste", formInput);
-// // A mensagem de erro será o segundo parâmetro da função
-// const showInputError = (element, errorMessage) => {
-//   element.classList.add("form__input_type_error");
-//   // Substitua o conteúdo da mensagem de erro pelo argumento errorMessage validado
-//   formError.textContent = errorMessage;
-//   formError.classList.add("form__input-error_active");
-// };
-
-// const hideInputError = (element) => {
-//   element.classList.remove("form__input_type_error");
-//   formError.classList.remove("form__input-error_active");
-//   // Redefina o erro
-//   formError.textContent = "";
-// };
-
-// const isValid = () => {
-//   if (!formInput.validity.valid) {
-//     // A própria mensagem de erro é o segundo parâmetro da função
-//     showInputError(formInput, formInput.validationMessage);
-//   } else {
-//     hideInputError(formInput);
-//   }
-// };
-
-// // Chame a função isValid() para cada entrada de caractere
-// formInput.addEventListener("input", isValid);
-// // O resto da programação permanece inalterada
+enableValidation({
+  formSelector: ".popupAdd__form",
+  inputSelector: ".popupAdd__input-box",
+  submitButtonSelector: ".popupAdd__save-btn",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: ".popup__error",
+});

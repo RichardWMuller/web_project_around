@@ -1,17 +1,21 @@
 /*POP UPS */
+// import enableValidation from "./validation.js";
 
 const profileButton = document.querySelector(".profile__btn-title");
-
-const profileTitle = document.querySelector(".profile__title");
-const profileSubtitle = document.querySelector(".profile__subtitle");
-
-document.querySelector("#name").value = profileTitle.textContent;
-document.querySelector("#job").value = profileSubtitle.textContent;
 
 profileButton.addEventListener("click", () => {
   const popupElement = document.querySelector(".popup");
 
+  const profileTitle = document.querySelector(".profile__title");
+  const profileSubtitle = document.querySelector(".profile__subtitle");
+
+  const saveButton = document.querySelector(".popup__save-btn");
+
+  document.querySelector("#name").value = profileTitle.textContent;
+  document.querySelector("#job").value = profileSubtitle.textContent;
+
   popupElement.classList.add("popup__opened");
+  saveButton.setAttribute("disabled", true);
 });
 
 function handleModalClose() {
@@ -63,8 +67,9 @@ const imageButtonAdd = document.querySelector(".profile__btn-add");
 
 imageButtonAdd.addEventListener("click", () => {
   const popupElement = document.querySelector(".popupAdd");
-
+  const saveButton = document.querySelector(".popupAdd__save-btn");
   popupElement.classList.add("popupAdd__opened");
+  saveButton.setAttribute("disabled", true);
 });
 
 function handleModalCloseAdd() {
