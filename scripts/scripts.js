@@ -31,6 +31,20 @@ function cleanValidations(inputSelector) {
   });
 }
 
+function cleanValidationAdd(inputSelector) {
+  const popupInputs = document.querySelectorAll(inputSelector);
+
+  const inputs = Array.from(popupInputs);
+
+  inputs.forEach((input) => {
+    const spanError = input.parentElement.querySelector(".popupAdd__error");
+
+    spanError.textContent = "";
+
+    input.classList.remove("popup__input_type_error");
+  });
+}
+
 function handleModalClose() {
   const closePopup = document.querySelector(".popup__opened");
   cleanValidations(".popup__input-box");
@@ -96,7 +110,7 @@ function resetNewLocalForm() {
 
 function handleModalCloseAdd() {
   const closePopupAdd = document.querySelector(".popupAdd__opened");
-  cleanValidations(".popupAdd__input-box");
+  cleanValidationAdd(".popupAdd__input-box");
   resetNewLocalForm();
   closePopupAdd.classList.remove("popupAdd__opened");
 }
