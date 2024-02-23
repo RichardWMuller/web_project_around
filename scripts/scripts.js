@@ -24,6 +24,7 @@ function cleanValidations(inputSelector) {
 
   inputs.forEach((input) => {
     const spanError = input.parentElement.querySelector(".popup__error");
+
     spanError.textContent = "";
 
     input.classList.remove("popup__input_type_error");

@@ -68,5 +68,5 @@ enableValidation({
   inputSelector: ".popupAdd__input-box",
   submitButtonSelector: ".popupAdd__save-btn",
   inputErrorClass: "popup__input_type_error",
-  errorClass: ".popup__error",
+  errorClass: ".popupAdd__error",
 });
