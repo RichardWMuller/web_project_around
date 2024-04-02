@@ -1,6 +1,7 @@
-import Card from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
-import { enableValidation, handleModalCloseAdd } from "./utils.js";
+import Card from "./components/Card.js";
+import FormValidator from "./components/FormValidator.js";
+import { enableValidation, handleModalCloseAdd } from "./components/utils.js";
+import "./pages/index.css";
 
 function handleProfileFormSubmitAdd(event) {
   event.preventDefault();
