@@ -1,6 +1,7 @@
 import { handleOpenImageModal } from "./utils.js";
 export default class Card {
-  constructor(name, link) {
+  constructor({ name, link }, templateSelector) {
+    this._templateSelector = templateSelector;
     this._name = name;
     this._link = link;
   }
