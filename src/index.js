@@ -9,24 +9,68 @@ import "./pages/index.css";
 function handleProfileFormSubmitAdd(event) {
   event.preventDefault();
 }
+
+/* API */
+
+// const api = new Api({
+//   baseUrl: "https://around.nomoreparties.co/v1/group-42",
+//   headers: {
+//     authorization: "e56efdde-cda5-421a-9ac8-6287a7acd788",
+//     "Content-Type": "application/json",
+//   },
+// });
+
+async function getInitialCards() {
+  await fetch("https://around.nomoreparties.co/v1/web_ptbr_09/cards", {
+    headers: {
+      authorization: "e56efdde-cda5-421a-9ac8-6287a7acd788",
+    },
+  })
+    .then((res) => res.json())
+    .then((result) => {
+      const cardSelector = new Section(
+        {
+          items: result,
+          renderer: (item) => {
+            const createdCard = new Card(item, elementsList);
+            const cardElement = createdCard.generateCard();
+            cardSelector.setItem(cardElement);
+          },
+        },
+        ".elements__list"
+      );
+      cardSelector.rendererItems();
+    });
+}
+getInitialCards();
+
+fetch("https://around.nomoreparties.co/v1/web_ptbr_09/users/me", {
+  headers: {
+    authorization: "e56efdde-cda5-421a-9ac8-6287a7acd788",
+  },
+})
+  .then((res) => res.json())
+  .then((result) => {
+    console.log(result);
+  });
+
 /* INITIAL CARDS */
 
 const elementsList = document.querySelector(".elements__list");
 const formAddPlace = document.querySelector(".popupAdd__form");
 const popupClose = document.querySelectorAll(".popupAdd__save-btn");
 
-const cardSelector = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const createdCard = new Card(item, elementsList);
-      const cardElement = createdCard.generateCard();
-      cardSelector.setItem(cardElement);
-    },
-  },
-  ".elements__list"
-);
-cardSelector.rendererItems();
+// const cardSelector = new Section(
+//   {
+//     items: initialCards,
+//     renderer: (item) => {
+//       const createdCard = new Card(item, elementsList);
+//       const cardElement = createdCard.generateCard();
+//       cardSelector.setItem(cardElement);
+//     },
+//   },
+//   ".elements__list"
+// );
 
 function handleAddNewPost(evt) {
   evt.preventDefault();

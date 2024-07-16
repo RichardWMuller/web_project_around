@@ -15,7 +15,7 @@ export const initialCards = [
   },
   {
     name: "Carvoeiro",
-    link: "https://seafaris.net/wp-content/uploads/2022/04/benagil-fora-.jpg",
+    link: "https://seafaris.pt/wp-content/uploads/2017/01/francois-olwage-W_zLNx693Yw-unsplash.jpg",
   },
   {
     name: "Lagoa",
