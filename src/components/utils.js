@@ -1,3 +1,5 @@
+import { api } from "./Api";
+
 const elementsList = document.querySelector(".elements__list");
 const formAddPlace = document.querySelector(".popupAdd__form");
 const popupClose = document.querySelectorAll(".popupAdd__save-btn");
@@ -141,15 +143,15 @@ document.addEventListener("keydown", closePopupWithKey);
 
 const editProfileFormElement = document.querySelector(".popup__form");
 
-function handleProfileFormSubmit(event) {
+async function handleProfileFormSubmit(event) {
   event.preventDefault();
 
   const nameInput = document.querySelector("#name");
   const jobInput = document.querySelector("#job");
 
-  document.querySelector(".profile__title").textContent = nameInput.value;
-  document.querySelector(".profile__subtitle").textContent = jobInput.value;
-
+  const updatedUser = await api.updateUser(nameInput.value, jobInput.value);
+  document.querySelector(".profile__title").textContent = updatedUser.name;
+  document.querySelector(".profile__subtitle").textContent = updatedUser.about;
   handleModalClose();
 }
 

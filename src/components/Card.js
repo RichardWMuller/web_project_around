@@ -1,32 +1,5 @@
 import { handleOpenImageModal } from "./utils.js";
 
-export const initialCards = [
-  {
-    name: "Albufeira",
-    link: "https://i.redd.it/l2wzk4kzoija1.jpg",
-  },
-  {
-    name: "Albufeira",
-    link: "https://dicasdelisboa.com.br/wp-content/uploads/2016/11/acessopraiadafalesia.jpg",
-  },
-  {
-    name: "Lagos",
-    link: "https://images.unsplash.com/photo-1627632984837-fb8fa3cd4792?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Carvoeiro",
-    link: "https://seafaris.pt/wp-content/uploads/2017/01/francois-olwage-W_zLNx693Yw-unsplash.jpg",
-  },
-  {
-    name: "Lagoa",
-    link: "https://praia.info/wp-content/uploads/2022/04/praia-da-marinha-algarve.png",
-  },
-  {
-    name: "Albufeira",
-    link: "https://images.turismoenportugal.org/Praia-da-Oura-Albufeira.jpg",
-  },
-];
-
 export default class Card {
   constructor({ name, link }, templateSelector) {
     this._name = name;

@@ -1,19 +1,56 @@
-// class Api {
-//   constructor(options) {
-//     // corpo do construtor
-//   }
+export default class Api {
+  constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
+  }
 
-//   getInitialCards() {
-//     // ...
-//   }
+  _verifyResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Erro: ${res.status}`);
+  }
 
-//   // outros métodos para trabalhar com a API
-// }
+  async getUser() {
+    return await fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+    })
+      .then(this._verifyResponse)
+      .catch((err) => {
+        console.error("Erro ao buscar informações do usuário:", err);
+      });
+  }
 
-// const api = new Api({
-//   baseUrl: "https://around.nomoreparties.co/v1/group-42",
-//   headers: {
-//     authorization: "e56efdde-cda5-421a-9ac8-6287a7acd788",
-//     "Content-Type": "application/json",
-//   },
-// });
+  async getInitialCards() {
+    return await fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers,
+    })
+      .then(this._verifyResponse)
+      .catch((err) => {
+        console.error("Erro ao buscar os cards iniciais:", err);
+      });
+  }
+
+  async updateUser(userName, userAbout) {
+    return await fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: userName,
+        about: userAbout,
+      }),
+    })
+      .then(this._verifyResponse)
+      .catch((err) => {
+        console.error("Erro ao buscar informações do usuário:", err);
+      });
+  }
+}
+
+export const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/web_ptbr_09",
+  headers: {
+    authorization: "e56efdde-cda5-421a-9ac8-6287a7acd788",
+    "Content-Type": "application/json",
+  },
+});
