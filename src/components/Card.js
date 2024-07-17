@@ -1,10 +1,25 @@
 import { handleOpenImageModal } from "./utils.js";
 
 export default class Card {
-  constructor({ name, link }, templateSelector) {
+  constructor({
+    name,
+    link,
+    likes,
+    id,
+    userId,
+    api,
+    ownerId,
+    popupWithConfirmation,
+  }) {
     this._name = name;
     this._link = link;
-    this._templateSelector = templateSelector;
+    this._likes = likes;
+    this._id = id;
+    this._userId = userId;
+    this._api = api;
+    this._ownerId = ownerId;
+    this._popupWithConfirmation = popupWithConfirmation;
+    this._element = this._getTemplate();
   }
 
   _getTemplate() {

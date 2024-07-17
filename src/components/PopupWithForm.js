@@ -2,12 +2,18 @@ import { api } from "./Api.js";
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor(popupSelector, submitCallback) {
+  constructor(
+    popupSelector,
+    formSelector,
+    inputSelector,
+    saveButtonSelector,
+    submitCallback
+  ) {
     super(popupSelector);
     this._submitCallback = submitCallback;
-    this._formElement = this._popup.querySelector(".popup__form");
-    this._inputList = this._formElement.querySelectorAll(".popup__input-box");
-    this._submitButton = this._formElement.querySelector(".popup__save-btn");
+    this._formElement = this._popup.querySelector(formSelector);
+    this._inputList = this._formElement.querySelectorAll(inputSelector);
+    this._submitButton = this._formElement.querySelector(saveButtonSelector);
   }
 
   _getInputValues() {

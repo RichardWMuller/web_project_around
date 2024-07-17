@@ -158,18 +158,25 @@ const editProfileFormElement = document.querySelector(".popup__form");
 
 async function handleProfileFormSubmit(event) {
   event.preventDefault();
-  const editProfilePopup = new PopupWithForm(".popup", async (inputValues) => {
-    const { name, job } = inputValues;
-    try {
-      const updatedUser = await api.updateUser(name, job);
-      document.querySelector(".profile__title").textContent = updatedUser.name;
-      document.querySelector(".profile__subtitle").textContent =
-        updatedUser.about;
-      editProfilePopup.close();
-    } catch (error) {
-      console.error("Error Updating user profile", error);
+  const editProfilePopup = new PopupWithForm(
+    ".popup",
+    ".popup__form",
+    ".popup__input-box",
+    ".popup__save-btn",
+    async (inputValues) => {
+      const { name, job } = inputValues;
+      try {
+        const updatedUser = await api.updateUser(name, job);
+        document.querySelector(".profile__title").textContent =
+          updatedUser.name;
+        document.querySelector(".profile__subtitle").textContent =
+          updatedUser.about;
+        editProfilePopup.close();
+      } catch (error) {
+        console.error("Error Updating user profile", error);
+      }
     }
-  });
+  );
   editProfilePopup.setEventListeners();
 
   // const nameInput = document.querySelector("#name");

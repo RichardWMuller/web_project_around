@@ -31,6 +31,18 @@ export default class Api {
       });
   }
 
+  async createCard(card) {
+    return await fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers,
+      method: "POST",
+      body: JSON.stringify(card),
+    })
+      .then(this._verifyResponse)
+      .catch((err) => {
+        console.error("Erro ao criar o card:", err);
+      });
+  }
+
   async updateUser(userName, userAbout) {
     return await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",

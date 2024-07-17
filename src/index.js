@@ -45,26 +45,40 @@ const elementsList = document.querySelector(".elements__list");
 const formAddPlace = document.querySelector(".popupAdd__form");
 const popupClose = document.querySelectorAll(".popupAdd__save-btn");
 
-function handleAddNewPost(evt) {
-  evt.preventDefault();
-  const titleInput = evt.target.querySelector(".popupAdd__input-box-title");
-  const linkInput = evt.target.querySelector(".popupAdd__input-box-link");
-
-  const addCard = { name: titleInput.value, link: linkInput.value };
-  const createdCard = new Card(addCard, elementsList);
-  const cardElement = createdCard.generateCard();
-  const newCard = new Section(
-    {
-      items: [cardElement],
-      renderer: (item) => {
-        newCard.setItem(cardElement);
-      },
-    },
-    ".elements__list"
+async function handleAddNewPost(event) {
+  event.preventDefault();
+  const createCardPopup = new PopupWithForm(
+    ".popupAdd",
+    ".popupAdd__form",
+    ".popupAdd__input-box",
+    ".popupAdd__save-btn",
+    async (inputValues) => {
+      const { title, link } = inputValues;
+      const addCard = {
+        name: title,
+        link: link,
+      };
+      try {
+        const createCard = await api.createCard(addCard);
+        const createdCard = new Card(createCard, elementsList);
+        const cardElement = createdCard.generateCard();
+        const newCard = new Section(
+          {
+            items: [cardElement],
+            renderer: () => {
+              newCard.setItem(cardElement);
+            },
+          },
+          ".elements__list"
+        );
+        newCard.rendererItems();
+        createCardPopup.close();
+      } catch (error) {
+        console.error("Error Updating user profile", error);
+      }
+    }
   );
-  newCard.rendererItems();
-
-  evt.target.reset();
-  handleModalCloseAdd();
 }
+createCardPopup.setEventListeners();
+
 formAddPlace.addEventListener("submit", handleAddNewPost);
