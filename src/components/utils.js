@@ -1,4 +1,5 @@
 import { api } from "./Api";
+import PopupWithForm from "./PopupWithForm";
 
 const elementsList = document.querySelector(".elements__list");
 const formAddPlace = document.querySelector(".popupAdd__form");
@@ -143,16 +144,40 @@ document.addEventListener("keydown", closePopupWithKey);
 
 const editProfileFormElement = document.querySelector(".popup__form");
 
+// async function getUpdatedUser(inputValues) {
+//   const { name, job } = inputValues;
+//   try {
+//     const updatedUser = await api.updateUser(name, job);
+//     document.querySelector(".profile__title").textContent = updatedUser.name;
+//     document.querySelector(".profile__subtitle").textContent =
+//       updatedUser.about;
+//   } catch (error) {
+//     console.error("Error Updating user profile", error);
+//   }
+// }
+
 async function handleProfileFormSubmit(event) {
   event.preventDefault();
+  const editProfilePopup = new PopupWithForm(".popup", async (inputValues) => {
+    const { name, job } = inputValues;
+    try {
+      const updatedUser = await api.updateUser(name, job);
+      document.querySelector(".profile__title").textContent = updatedUser.name;
+      document.querySelector(".profile__subtitle").textContent =
+        updatedUser.about;
+      editProfilePopup.close();
+    } catch (error) {
+      console.error("Error Updating user profile", error);
+    }
+  });
+  editProfilePopup.setEventListeners();
 
-  const nameInput = document.querySelector("#name");
-  const jobInput = document.querySelector("#job");
-
-  const updatedUser = await api.updateUser(nameInput.value, jobInput.value);
-  document.querySelector(".profile__title").textContent = updatedUser.name;
-  document.querySelector(".profile__subtitle").textContent = updatedUser.about;
-  handleModalClose();
+  // const nameInput = document.querySelector("#name");
+  // const jobInput = document.querySelector("#job");
+  // const updatedUser = await api.updateUser(nameInput.value, jobInput.value);
+  // document.querySelector(".profile__title").textContent = updatedUser.name;
+  // document.querySelector(".profile__subtitle").textContent = updatedUser.about;
+  // handleModalClose();
 }
 
 editProfileFormElement.addEventListener("submit", handleProfileFormSubmit);
