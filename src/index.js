@@ -74,11 +74,11 @@ async function handleAddNewPost(event) {
         newCard.rendererItems();
         createCardPopup.close();
       } catch (error) {
-        console.error("Error Updating user profile", error);
+        console.error("Error creating card", error);
       }
     }
   );
+  createCardPopup.setEventListeners();
 }
-createCardPopup.setEventListeners();
 
 formAddPlace.addEventListener("submit", handleAddNewPost);
