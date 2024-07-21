@@ -8,11 +8,8 @@ import "./pages/index.css";
 import { api } from "./components/Api.js";
 import { userInfo } from "./components/UserInfo.js";
 
-function handleProfileFormSubmitAdd(event) {
-  event.preventDefault();
-}
-
 /* API */
+const elementsList = document.querySelector(".elements__list");
 
 async function getInitialCards() {
   const initialCards = await api.getInitialCards();
@@ -40,45 +37,3 @@ async function getUserInfo() {
 getUserInfo();
 
 /* INITIAL CARDS */
-
-const elementsList = document.querySelector(".elements__list");
-const formAddPlace = document.querySelector(".popupAdd__form");
-const popupClose = document.querySelectorAll(".popupAdd__save-btn");
-
-async function handleAddNewPost(event) {
-  event.preventDefault();
-  const createCardPopup = new PopupWithForm(
-    ".popupAdd",
-    ".popupAdd__form",
-    ".popupAdd__input-box",
-    ".popupAdd__save-btn",
-    async (inputValues) => {
-      const { title, link } = inputValues;
-      const addCard = {
-        name: title,
-        link: link,
-      };
-      try {
-        const createCard = await api.createCard(addCard);
-        const createdCard = new Card(createCard, elementsList);
-        const cardElement = createdCard.generateCard();
-        const newCard = new Section(
-          {
-            items: [cardElement],
-            renderer: () => {
-              newCard.setItem(cardElement);
-            },
-          },
-          ".elements__list"
-        );
-        newCard.rendererItems();
-        createCardPopup.close();
-      } catch (error) {
-        console.error("Error creating card", error);
-      }
-    }
-  );
-  createCardPopup.setEventListeners();
-}
-
-formAddPlace.addEventListener("submit", handleAddNewPost);

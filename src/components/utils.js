@@ -1,9 +1,9 @@
 import { api } from "./Api";
+import Card from "./Card";
 import PopupWithForm from "./PopupWithForm";
+import Section from "./Section";
 
 const elementsList = document.querySelector(".elements__list");
-const formAddPlace = document.querySelector(".popupAdd__form");
-const popupClose = document.querySelectorAll(".popupAdd__save-btn");
 
 const profileButton = document.querySelector(".profile__btn-title");
 
@@ -37,6 +37,75 @@ function handleOpenImageModal(imageSrc, imageTitle) {
 
   popupImgElement.classList.add("popupImg-opened");
 }
+
+const editProfileFormElement = document.querySelector(".popup__form");
+
+const editProfilePopup = new PopupWithForm(
+  ".popup",
+  ".popup__close-btn-icon",
+  "popup__opened",
+  ".popup__form",
+  ".popup__input-box",
+  ".popup__save-btn",
+  async (inputValues) => {
+    const { name, job } = inputValues;
+    try {
+      const updatedUser = await api.updateUser(name, job);
+      document.querySelector(".profile__title").textContent = updatedUser.name;
+      document.querySelector(".profile__subtitle").textContent =
+        updatedUser.about;
+      editProfilePopup.close();
+    } catch (error) {
+      console.error("Error Updating user profile", error);
+    }
+  }
+);
+
+editProfileFormElement.addEventListener(
+  "submit",
+  editProfilePopup.setEventListeners()
+);
+
+const addCardFormElement = document.querySelector(".popupAdd__form");
+
+const createCardPopup = new PopupWithForm(
+  ".popupAdd",
+  ".popupAdd__close-btn-icon",
+  "popupAdd__opened",
+  ".popupAdd__form",
+  ".popupAdd__input-box",
+  ".popupAdd__save-btn",
+  async (inputValues) => {
+    const { title, link } = inputValues;
+    const addCard = {
+      name: title,
+      link: link,
+    };
+    try {
+      const createCard = await api.createCard(addCard);
+      const createdCard = new Card(createCard, elementsList);
+      const cardElement = createdCard.generateCard();
+      const newCard = new Section(
+        {
+          items: [cardElement],
+          renderer: () => {
+            newCard.setItem(cardElement);
+          },
+        },
+        ".elements__list"
+      );
+      newCard.rendererItems();
+      createCardPopup.close();
+    } catch (error) {
+      console.error("Error creating card", error);
+    }
+  }
+);
+
+addCardFormElement.addEventListener(
+  "submit",
+  createCardPopup.setEventListeners()
+);
 
 elementsList.addEventListener("click", function (event) {
   const target = event.target;
@@ -114,80 +183,27 @@ function cleanValidationAdd(inputSelector) {
   });
 }
 
-function handleModalClose() {
-  const closePopup = document.querySelector(".popup__opened");
-  cleanValidations(".popup__input-box");
-  closePopup.classList.remove("popup__opened");
-}
-
 const modalCloseButton = document.querySelector(".popup__close-btn-icon");
-modalCloseButton.addEventListener("click", handleModalClose);
+modalCloseButton.addEventListener("click", editProfilePopup.close());
 
 function closePopupWithKey(evt) {
   const closePopup = document.querySelector(".popup__opened");
   const hasPopup = !!closePopup;
   if (hasPopup && evt.key === "Escape") {
-    handleModalClose();
+    editProfilePopup.close();
   }
 }
 
 function closePopupClickOut(evt) {
   const closePopup = document.querySelector(".popup");
   if (evt.target == closePopup) {
-    handleModalClose();
+    editProfilePopup.close();
   }
 }
 
 document.addEventListener("click", closePopupClickOut);
 
 document.addEventListener("keydown", closePopupWithKey);
-
-const editProfileFormElement = document.querySelector(".popup__form");
-
-// async function getUpdatedUser(inputValues) {
-//   const { name, job } = inputValues;
-//   try {
-//     const updatedUser = await api.updateUser(name, job);
-//     document.querySelector(".profile__title").textContent = updatedUser.name;
-//     document.querySelector(".profile__subtitle").textContent =
-//       updatedUser.about;
-//   } catch (error) {
-//     console.error("Error Updating user profile", error);
-//   }
-// }
-
-async function handleProfileFormSubmit(event) {
-  event.preventDefault();
-  const editProfilePopup = new PopupWithForm(
-    ".popup",
-    ".popup__form",
-    ".popup__input-box",
-    ".popup__save-btn",
-    async (inputValues) => {
-      const { name, job } = inputValues;
-      try {
-        const updatedUser = await api.updateUser(name, job);
-        document.querySelector(".profile__title").textContent =
-          updatedUser.name;
-        document.querySelector(".profile__subtitle").textContent =
-          updatedUser.about;
-        editProfilePopup.close();
-      } catch (error) {
-        console.error("Error Updating user profile", error);
-      }
-    }
-  );
-  editProfilePopup.setEventListeners();
-
-  // const nameInput = document.querySelector("#name");
-  // const jobInput = document.querySelector("#job");
-  // const updatedUser = await api.updateUser(nameInput.value, jobInput.value);
-  // document.querySelector(".profile__title").textContent = updatedUser.name;
-  // document.querySelector(".profile__subtitle").textContent = updatedUser.about;
-  // handleModalClose();
-}
-
-editProfileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 /* IMAGE ADD BUTTON */
 
@@ -216,13 +232,13 @@ function handleModalCloseAdd() {
 }
 
 const modalCloseButtonAdd = document.querySelector(".popupAdd__close-btn-icon");
-modalCloseButtonAdd.addEventListener("click", handleModalCloseAdd);
+modalCloseButtonAdd.addEventListener("click", createCardPopup.close());
 
 function closePopupAddWithKey(evt) {
   const closePopupAdd = document.querySelector(".popupAdd__opened");
   const hasPopupAdd = !!closePopupAdd;
   if (hasPopupAdd && evt.key == "Escape") {
-    handleModalCloseAdd();
+    createCardPopup.close();
   }
 }
 
@@ -231,13 +247,11 @@ document.addEventListener("keydown", closePopupAddWithKey);
 function closePopupAddClickOut(evt) {
   const closePopupAdd = document.querySelector(".popupAdd");
   if (evt.target == closePopupAdd) {
-    handleModalCloseAdd();
+    createCardPopup.close();
   }
 }
 
 document.addEventListener("click", closePopupAddClickOut);
-
-const addCardFormElement = document.querySelector(".popupAdd__form");
 
 const enableValidation = {
   formSelector: ".popup__form",

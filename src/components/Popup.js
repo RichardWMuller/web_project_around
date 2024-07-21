@@ -1,16 +1,18 @@
 export default class Popup {
-  constructor(popupSelector) {
+  constructor(popupSelector, closeButtonSelector, modalOpenSelector) {
     this._popup = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
+    this._closeButtonSelector = closeButtonSelector;
+    this._modalOpenSelector = modalOpenSelector;
   }
 
   open() {
-    this._popup.classList.add("popup__opened");
+    this._popup.classList.add(this._modalOpenSelector);
     this.setEventListeners();
   }
 
   close() {
-    this._popup.classList.remove("popup__opened");
+    this._popup.classList.remove(this._modalOpenSelector);
     this.removeEventListeners();
   }
 
@@ -22,7 +24,7 @@ export default class Popup {
 
   setEventListeners() {
     this._popup
-      .querySelector(".popup__close-btn-icon")
+      .querySelector(this._closeButtonSelector)
       .addEventListener("click", () => {
         this.close();
       });
@@ -38,7 +40,7 @@ export default class Popup {
 
   removeEventListeners() {
     this._popup
-      .querySelector(".popup__close-btn-icon")
+      .querySelector(this._closeButtonSelector)
       .removeEventListener("click", () => {
         this.close();
       });
