@@ -43,6 +43,17 @@ export default class Api {
       });
   }
 
+  async deleteCard(cardId) {
+    return await fetch(`${this._baseUrl}/cards/${cardId}`, {
+      headers: this._headers,
+      method: "DELETE",
+    })
+      .then(this._verifyResponse)
+      .catch((err) => {
+        console.error("Erro ao deletar o card:", err);
+      });
+  }
+
   async updateUser(userName, userAbout) {
     return await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",

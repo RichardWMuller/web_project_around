@@ -1,5 +1,6 @@
 import { api } from "./Api";
 import Card from "./Card";
+import PopupWithConfirmation from "./PopupWithConfirmation";
 import PopupWithForm from "./PopupWithForm";
 import Section from "./Section";
 
@@ -65,6 +66,26 @@ editProfileFormElement.addEventListener(
   "submit",
   editProfilePopup.setEventListeners()
 );
+
+const popupDeleteFormElement = document.querySelector(".popup__delete-form");
+
+const popupDeleteImg = new PopupWithConfirmation(
+  ".popup__delete",
+  ".popup__delete-form",
+  ".popup__delete-btn",
+  async () => {
+    try {
+      const openedCard = new Card()._id;
+      console.log(openedCard, "teste");
+      const deleteCardImg = await api.deleteCard(openedCard);
+      document.querySelector("");
+    } catch (error) {
+      console.error("Error Deleting Card", error);
+    }
+  }
+);
+
+popupDeleteFormElement.addEventListener("submit");
 
 const addCardFormElement = document.querySelector(".popupAdd__form");
 

@@ -5,7 +5,7 @@ export default class Card {
     name,
     link,
     likes,
-    id,
+    _id,
     userId,
     api,
     ownerId,
@@ -14,7 +14,7 @@ export default class Card {
     this._name = name;
     this._link = link;
     this._likes = likes;
-    this._id = id;
+    this._id = _id;
     this._userId = userId;
     this._api = api;
     this._ownerId = ownerId;
@@ -70,6 +70,7 @@ export default class Card {
     this._element.querySelector(".elements__item").alt = this._name;
     this._element.querySelector(".elements__btn-hrt-counter").textContent =
       this._likes.length;
+    this._element.querySelector(".elements__btn-trh").id = this._id;
 
     return this._element;
   }
@@ -86,5 +87,9 @@ export default class Card {
       .classList.add("popup__delete-opened");
 
     // this._element.remove();
+  }
+
+  getOpenedCardId() {
+    return this._id;
   }
 }
