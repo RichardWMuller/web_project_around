@@ -68,6 +68,8 @@ export default class Card {
     this._element.querySelector(".elements__title").textContent = this._name;
     this._element.querySelector(".elements__item").src = this._link;
     this._element.querySelector(".elements__item").alt = this._name;
+    this._element.querySelector(".elements__btn-hrt-counter").textContent =
+      this._likes.length;
 
     return this._element;
   }
@@ -79,6 +81,10 @@ export default class Card {
   }
 
   _handleTrashButton() {
-    this._element.remove();
+    document
+      .querySelector(".popup__delete")
+      .classList.add("popup__delete-opened");
+
+    // this._element.remove();
   }
 }
