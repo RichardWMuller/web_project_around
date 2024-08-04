@@ -68,6 +68,28 @@ export default class Api {
         console.error("Erro ao buscar informações do usuário:", err);
       });
   }
+
+  async addLike() {
+    return await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: this._headers,
+    })
+      .then(this._verifyResponse)
+      .catch((err) => {
+        console.error("Erro ao dar likes:", err);
+      });
+  }
+
+  async removeLike() {
+    return await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+      .then(this._verifyResponse)
+      .catch((err) => {
+        console.error("Erro ao remover likes:", err);
+      });
+  }
 }
 
 export const api = new Api({

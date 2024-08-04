@@ -28,4 +28,8 @@ export default class PopupWithConfirmation extends Popup {
       this._submitCallback(this._formElement.id);
     });
   }
+  close() {
+    super.close();
+    this._formElement.reset();
+  }
 }

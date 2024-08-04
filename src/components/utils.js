@@ -72,7 +72,7 @@ const popupDeleteFormElement = document.querySelector(".popup__delete-form");
 
 const popupDeleteImg = new PopupWithConfirmation(
   ".popup__delete",
-  ".popup__close-btn-icon",
+  ".popup__delete-close-btn-icon",
   "popup__delete-opened",
   ".popup__delete-form",
   ".popup__delete-btn",
@@ -210,20 +210,44 @@ function cleanValidationAdd(inputSelector) {
 }
 
 const modalCloseButton = document.querySelector(".popup__close-btn-icon");
+const modalCloseDeleteButton = document.querySelector(
+  ".popup__delete-close-btn-icon"
+);
+
+modalCloseDeleteButton.addEventListener("click", () =>
+  closeDeletePopupWithClick()
+);
 modalCloseButton.addEventListener("click", editProfilePopup.close());
+
+function closeDeletePopupWithClick() {
+  const deletePopup = document.querySelector(".popup__delete-opened");
+  const hasDeletePopup = !!deletePopup;
+  if (hasDeletePopup) {
+    popupDeleteImg.close();
+  }
+}
 
 function closePopupWithKey(evt) {
   const closePopup = document.querySelector(".popup__opened");
+  const deletePopup = document.querySelector(".popup__delete-opened");
   const hasPopup = !!closePopup;
   if (hasPopup && evt.key === "Escape") {
     editProfilePopup.close();
+  }
+  const hasDeletePopup = !!deletePopup;
+  if (hasDeletePopup && evt.key === "Escape") {
+    popupDeleteImg.close();
   }
 }
 
 function closePopupClickOut(evt) {
   const closePopup = document.querySelector(".popup");
+  const deletePopup = document.querySelector(".popup__delete");
   if (evt.target == closePopup) {
     editProfilePopup.close();
+  }
+  if (evt.target == deletePopup) {
+    popupDeleteImg.close();
   }
 }
 
