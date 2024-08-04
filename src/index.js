@@ -31,7 +31,6 @@ getInitialCards();
 
 export async function getUserInfo() {
   const user = await api.getUser();
-  console.log(user, "user");
   userInfo.setUserInfo(user);
 }
 getUserInfo();

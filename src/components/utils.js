@@ -80,8 +80,7 @@ const popupDeleteImg = new PopupWithConfirmation(
     try {
       const deleteCardImg = await api.deleteCard(cardId);
       popupDeleteImg.close();
-      getInitialCards();
-      console.log(deleteCardImg, "teste");
+      await getInitialCards();
     } catch (error) {
       console.error("Error Deleting Card", error);
     }

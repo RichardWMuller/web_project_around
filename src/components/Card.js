@@ -70,7 +70,7 @@ export default class Card {
     this._element.querySelector(".elements__item").alt = this._name;
     this._element.querySelector(".elements__btn-hrt-counter").textContent =
       this._likes.length;
-    console.log(this._owner, "test1");
+
     if (this._owner._id === document.querySelector(".profile__avatar").id) {
       this._element
         .querySelector(".elements__btn-trh")
