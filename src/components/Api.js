@@ -69,7 +69,7 @@ export default class Api {
       });
   }
 
-  async addLike() {
+  async addLike(cardId) {
     return await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: this._headers,
@@ -80,7 +80,7 @@ export default class Api {
       });
   }
 
-  async removeLike() {
+  async removeLike(cardId) {
     return await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: this._headers,

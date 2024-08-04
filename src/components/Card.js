@@ -1,3 +1,5 @@
+import { getInitialCards } from "../index.js";
+import { api } from "./Api.js";
 import { handleOpenImageModal } from "./utils.js";
 
 export default class Card {
@@ -70,20 +72,47 @@ export default class Card {
     this._element.querySelector(".elements__item").alt = this._name;
     this._element.querySelector(".elements__btn-hrt-counter").textContent =
       this._likes.length;
-
-    if (this._owner._id === document.querySelector(".profile__avatar").id) {
+    this._element.querySelector(".elements__btn-hrt").id = this._id;
+    const myId = document.querySelector(".profile__avatar").id;
+    if (this._owner._id === myId) {
       this._element
         .querySelector(".elements__btn-trh")
         .classList.add("elements__btn-trh-visible");
     }
+    const hasLike = this._likes.some((user) => user._id === myId);
+
+    if (hasLike) {
+      this._element
+        .querySelector(".elements__btn-hrt")
+        .classList.add("elements__btn-hrt_actived");
+    }
 
     return this._element;
+  }
+
+  async addCardLike() {
+    await api.addLike(this._likeButton.id);
+
+    await getInitialCards();
+  }
+
+  async removeCardLike() {
+    await api.removeLike(this._likeButton.id);
+    await getInitialCards();
   }
 
   _handleLikeButton() {
     this._element
       .querySelector(".elements__btn-hrt")
       .classList.toggle("elements__btn-hrt_actived");
+
+    const myId = document.querySelector(".profile__avatar").id;
+    const hasLike = this._likes.some((user) => user._id === myId);
+    if (hasLike) {
+      return this.removeCardLike();
+    }
+
+    this.addCardLike();
   }
 
   _handleTrashButton() {
@@ -94,9 +123,5 @@ export default class Card {
     document.querySelector(".popup__delete-form").id = this._id;
 
     // this._element.remove();
-  }
-
-  getOpenedCardId() {
-    return this._id;
   }
 }
