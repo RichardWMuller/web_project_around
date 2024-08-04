@@ -11,7 +11,7 @@ import { userInfo } from "./components/UserInfo.js";
 /* API */
 const elementsList = document.querySelector(".elements__list");
 
-async function getInitialCards() {
+export async function getInitialCards() {
   const initialCards = await api.getInitialCards();
   const cardSelector = new Section(
     {
@@ -29,7 +29,7 @@ async function getInitialCards() {
 
 getInitialCards();
 
-async function getUserInfo() {
+export async function getUserInfo() {
   const user = await api.getUser();
   console.log(user, "user");
   userInfo.setUserInfo(user);

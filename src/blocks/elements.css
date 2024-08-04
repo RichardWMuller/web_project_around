@@ -44,6 +44,7 @@
  
 }
 .elements__btn-trh{
+  display: none;
   position: absolute;
   top: 18px;
   right: 15px;
@@ -54,6 +55,10 @@
   color: #fff;
   border: none;
 }
+.elements__btn-trh-visible{
+  display: flex;
+}
+
 
 .elements__btn-trh:hover{
   opacity: 0.6;

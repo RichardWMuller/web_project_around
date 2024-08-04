@@ -1,3 +1,4 @@
+import { getInitialCards } from "..";
 import { api } from "./Api";
 import Card from "./Card";
 import PopupWithConfirmation from "./PopupWithConfirmation";
@@ -71,21 +72,26 @@ const popupDeleteFormElement = document.querySelector(".popup__delete-form");
 
 const popupDeleteImg = new PopupWithConfirmation(
   ".popup__delete",
+  ".popup__close-btn-icon",
+  "popup__delete-opened",
   ".popup__delete-form",
   ".popup__delete-btn",
-  async () => {
+  async (cardId) => {
     try {
-      const openedCard = new Card()._id;
-      console.log(openedCard, "teste");
-      const deleteCardImg = await api.deleteCard(openedCard);
-      document.querySelector("");
+      const deleteCardImg = await api.deleteCard(cardId);
+      popupDeleteImg.close();
+      getInitialCards();
+      console.log(deleteCardImg, "teste");
     } catch (error) {
       console.error("Error Deleting Card", error);
     }
   }
 );
 
-popupDeleteFormElement.addEventListener("submit");
+popupDeleteFormElement.addEventListener(
+  "submit",
+  popupDeleteImg.setEventListeners()
+);
 
 const addCardFormElement = document.querySelector(".popupAdd__form");
 

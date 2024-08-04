@@ -8,7 +8,7 @@ export default class Card {
     _id,
     userId,
     api,
-    ownerId,
+    owner,
     popupWithConfirmation,
   }) {
     this._name = name;
@@ -17,7 +17,7 @@ export default class Card {
     this._id = _id;
     this._userId = userId;
     this._api = api;
-    this._ownerId = ownerId;
+    this._owner = owner;
     this._popupWithConfirmation = popupWithConfirmation;
     this._element = this._getTemplate();
   }
@@ -70,7 +70,12 @@ export default class Card {
     this._element.querySelector(".elements__item").alt = this._name;
     this._element.querySelector(".elements__btn-hrt-counter").textContent =
       this._likes.length;
-    this._element.querySelector(".elements__btn-trh").id = this._id;
+    console.log(this._owner, "test1");
+    if (this._owner._id === document.querySelector(".profile__avatar").id) {
+      this._element
+        .querySelector(".elements__btn-trh")
+        .classList.add("elements__btn-trh-visible");
+    }
 
     return this._element;
   }
@@ -85,6 +90,8 @@ export default class Card {
     document
       .querySelector(".popup__delete")
       .classList.add("popup__delete-opened");
+
+    document.querySelector(".popup__delete-form").id = this._id;
 
     // this._element.remove();
   }
