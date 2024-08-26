@@ -35,4 +35,4 @@ export async function getUserInfo() {
 }
 getUserInfo();
 
-/* INITIAL CARDS */
+/* USER INFO */

@@ -69,6 +69,20 @@ export default class Api {
       });
   }
 
+  async updateAvatar(avatar) {
+    return await fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    })
+      .then(this._verifyResponse)
+      .catch((err) => {
+        console.error("Erro ao atualizar o avatar do usuário:", err);
+      });
+  }
+
   async addLike(cardId) {
     return await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",

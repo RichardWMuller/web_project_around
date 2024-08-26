@@ -20,7 +20,34 @@ column-gap: 15px;
   height: 120px;
   margin-top: 36px;
   margin-right: 30px;
+  
+
 }
+
+.profile__avatar:hover{
+  opacity: 0.2;
+
+  
+}
+
+.profile__button-avatar{
+  
+  border: none;
+  background-position: 45%;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  padding-bottom: 25px;
+  margin-bottom: -25px;
+
+}
+
+.profile__button-avatar:hover{
+  background-image: url(../images/Vectorpen.png)
+
+  
+}
+
+
 .profile__title{
   max-width:373px;
   width: 100%;

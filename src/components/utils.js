@@ -255,6 +255,21 @@ document.addEventListener("click", closePopupClickOut);
 
 document.addEventListener("keydown", closePopupWithKey);
 
+const profileButtonAvatar = document.querySelector(".profile__button-avatar");
+
+profileButtonAvatar.addEventListener("click", () => {
+  const popupElement = document.querySelector(".popup__change-avatar");
+
+  const profileTitle = document.querySelector(".popup__change-avatar-title");
+
+  const saveButton = document.querySelector(".popup__change-avatar-save-btn");
+
+  document.querySelector("#name").value = profileTitle.textContent;
+
+  popupElement.classList.add(".popup__change-avatar-opened");
+  saveButton.setAttribute("disabled", true);
+});
+
 /* IMAGE ADD BUTTON */
 
 const imageButtonAdd = document.querySelector(".profile__btn-add");
