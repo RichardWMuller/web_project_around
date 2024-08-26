@@ -399,9 +399,6 @@ box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
 
 
 
-
-
-
 .popup__change-avatar {
 
   display: flex;
@@ -429,7 +426,7 @@ box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
 position: relative;
 background-color: #fff;
 width: 430px;
-height: 330px;
+height: 272px;
 padding: 36px;
 color: #000;
 border-radius: 10px;
@@ -454,6 +451,8 @@ box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
 /* align-items: center; */
   justify-content: center;
   /* gap:18px; */
+  margin-bottom: 25px;
+  margin-top: -10px;
 }
 
 .popup__change-avatar-input-box {
@@ -465,6 +464,7 @@ box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   outline: none;
   font-size: 14px;
+  margin-bottom: 36px;
   
 }
 .popup__change-avatar-input-box:focus {
@@ -501,7 +501,7 @@ box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
    }
 
 
-.popup__change-avatar-close-btn {
+.popup__change-avatar-btn-icon {
   position: absolute;
   color: #fff;
   top: -40px;
@@ -514,7 +514,7 @@ box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
 
 }
 
-.popup__change-avatar-close-btn:hover {
+.popup__change-avatar-btn-icon:hover {
   opacity: 0.6;
 
 }

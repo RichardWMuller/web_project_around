@@ -20,7 +20,7 @@ profileButton.addEventListener("click", () => {
   document.querySelector("#name").value = profileTitle.textContent;
   document.querySelector("#job").value = profileSubtitle.textContent;
 
-  popupElement.classList.add("popup__opened");
+  editProfilePopup.open();
   saveButton.setAttribute("disabled", true);
 });
 
@@ -52,7 +52,10 @@ const editProfilePopup = new PopupWithForm(
   async (inputValues) => {
     const { name, job } = inputValues;
     try {
+      const updateUserBtn = document.querySelector(".popup__save-btn");
+      updateUserBtn.textContent = "Salvando ...";
       const updatedUser = await api.updateUser(name, job);
+      updateUserBtn.textContent = "Salvar";
       document.querySelector(".profile__title").textContent = updatedUser.name;
       document.querySelector(".profile__subtitle").textContent =
         updatedUser.about;
@@ -78,7 +81,7 @@ const popupDeleteImg = new PopupWithConfirmation(
   ".popup__delete-btn",
   async (cardId) => {
     try {
-      const deleteCardImg = await api.deleteCard(cardId);
+      await api.deleteCard(cardId);
       popupDeleteImg.close();
       await getInitialCards();
     } catch (error) {
@@ -108,25 +111,32 @@ const createCardPopup = new PopupWithForm(
       link: link,
     };
     try {
-      const createCard = await api.createCard(addCard);
-      const createdCard = new Card(createCard, elementsList);
-      const cardElement = createdCard.generateCard();
-      const newCard = new Section(
-        {
-          items: [cardElement],
-          renderer: () => {
-            newCard.setItem(cardElement);
-          },
-        },
-        ".elements__list"
-      );
-      newCard.rendererItems();
+      const updateAddBtn = document.querySelector(".popupAdd__save-btn");
+      updateAddBtn.textContent = "Salvando ...";
+      await api.createCard(addCard);
+      updateAddBtn.textContent = "Salvar";
+
+      await getInitialCards();
       createCardPopup.close();
     } catch (error) {
       console.error("Error creating card", error);
     }
   }
 );
+
+const avatarButton = document.querySelector(".profile__button-avatar");
+
+avatarButton.addEventListener("click", () => {
+  const avatarLink = document.querySelector(
+    ".popup__change-avatar-input-box-link"
+  );
+
+  const saveButton = document.querySelector(".popup__change-avatar-save-btn");
+
+  document.querySelector("#link").value = avatarLink.textContent;
+
+  editProfileAvatarPopup.open();
+});
 
 addCardFormElement.addEventListener(
   "submit",
@@ -148,6 +158,38 @@ elementsList.addEventListener("click", function (event) {
     handleOpenImageModal(imageSrc, clickedImageTitle);
   }
 });
+
+const editAvatarProfile = document.querySelector(".popup__change-avatar-form");
+
+const editProfileAvatarPopup = new PopupWithForm(
+  ".popup__change-avatar",
+  ".popup__change-avatar-btn-icon",
+  "popup__change-avatar-opened",
+  ".popup__change-avatar-form",
+  ".popup__change-avatar-input-box",
+  ".popup__change-avatar-save-btn",
+
+  async (inputValues) => {
+    const { link } = inputValues;
+    try {
+      const saveProfileAvatarBtn = document.querySelector(
+        ".popup__change-avatar-save-btn"
+      );
+      saveProfileAvatarBtn.textContent = "Salvando ...";
+      const updatedAvatar = await api.updateAvatar(link);
+      saveProfileAvatarBtn.textContent = "Salvar";
+      document.querySelector(".profile__avatar").src = updatedAvatar.avatar;
+      editProfileAvatarPopup.close();
+    } catch (error) {
+      console.error("Error Updating user profile", error);
+    }
+  }
+);
+
+editAvatarProfile.addEventListener(
+  "submit",
+  editProfileAvatarPopup.setEventListeners()
+);
 
 function handleCloseImageModal() {
   const imgOpened = document.querySelector(".popupImg-opened");
@@ -254,21 +296,6 @@ function closePopupClickOut(evt) {
 document.addEventListener("click", closePopupClickOut);
 
 document.addEventListener("keydown", closePopupWithKey);
-
-const profileButtonAvatar = document.querySelector(".profile__button-avatar");
-
-profileButtonAvatar.addEventListener("click", () => {
-  const popupElement = document.querySelector(".popup__change-avatar");
-
-  const profileTitle = document.querySelector(".popup__change-avatar-title");
-
-  const saveButton = document.querySelector(".popup__change-avatar-save-btn");
-
-  document.querySelector("#name").value = profileTitle.textContent;
-
-  popupElement.classList.add(".popup__change-avatar-opened");
-  saveButton.setAttribute("disabled", true);
-});
 
 /* IMAGE ADD BUTTON */
 

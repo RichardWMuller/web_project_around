@@ -74,6 +74,8 @@ export default class Card {
       this._likes.length;
     this._element.querySelector(".elements__btn-hrt").id = this._id;
     const myId = document.querySelector(".profile__avatar").id;
+    console.log("test", myId);
+    console.log("test2", this._owner._id);
     if (this._owner._id === myId) {
       this._element
         .querySelector(".elements__btn-trh")

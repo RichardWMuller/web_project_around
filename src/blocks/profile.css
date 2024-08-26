@@ -21,6 +21,7 @@ column-gap: 15px;
   margin-top: 36px;
   margin-right: 30px;
   
+  
 
 }
 
@@ -38,11 +39,13 @@ column-gap: 15px;
   border-radius: 50%;
   padding-bottom: 25px;
   margin-bottom: -25px;
+  outline: none;
 
 }
 
 .profile__button-avatar:hover{
   background-image: url(../images/Vectorpen.png)
+  
 
   
 }
